@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load static %}
+{% block title %}
+  Red House
+{% endblock title %}
+{% block body %}
+<div class=py-2>
+    <!--Nav-->
+    <nav class="bg-gray-800 p-2 mt-0 fixed w-full z-10 top-0">
+        <div class="container mx-auto flex flex-wrap items-center">
+            <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+                <a class="text-white no-underline hover:text-white hover:no-underline" href="#">
+                    <span class="text-2xl pl-2"><i class="em em-grinning"></i> Hidden Valley Coorg | Forest Cabin </span>
+                </a>
+            </div>
+            <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
+                <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+                  <li class="mr-3">
+                    <a class="inline-block py-2 px-4 text-white no-underline hover:underline hover:text-red-900 js-toggle-model-contact" href="#"> Contact </a>
+                  </li>
+                  <li class="mr-3">
+                    <a class="inline-block text-gray-200 no-underline hover:text-red-900 hover:underline py-2 px-4" href="https://goo.gl/maps/E41MWgNMwjPVjDeK6"> Direction </a>
+                  </li>
+                  <li class="mr-3">
+                    <a class="inline-block text-gray-200 no-underline hover:text-red-900 hover:underline py-2 px-4 js-gallery" href="#Go"> Gallery</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="w-screen h-screen px-4 pt-2">
+        <div class="absolute inset-0 pt-2 ">
+            <img class="object-cover w-full h-full rounded-lg overflow-hidden " src="{% static 'img/sunset.jpg' %}" alt="A computer background">
+            <div class="absolute inset-0  mix-blend-multiply"></div>
+        </div>
+        <div class="relative py-24 font-extrabold" id="relative">
+            <div class="px-36 py-2 mx-auto my-auto max-w-7xl md:max-h-2xl md:py-6">
+                <h1 class="sm:text-2xl text-2xl md:text-3xl  font-extrabold  text-red-900">RedHouse Homestay - Pushpagiri Forest Reserve</h1>
+                <p class="pt-2  text-red-800  md:pt-3 font-style: italic">
+                    Homestay in Galibidu, Madikeri Coorg
+                </p>
+                <p class="text-red-800 font-style: italic">
+                    Open 24 hours*
+                </p>
+            </div>
+        </div>
+    </div>
+    <p style ="text-align: center;" class=" font-extrabold text-red-900 hover:text-white underline text-4xl pl-2 " > Explore: </p>
+    <section class="pt-24 flex flex-col justify-center">
+        <div class="grid grid-cols-2 gap-2 max-w-6xl mx-auto">
+        <div class="-mt-20 flex justify-end">
+            <img class="w-2/3 h-2/3 object-cover rounded-lg overflow-hidden" src="{% static 'img/pic1.png' %}" />
+        </div>
+        <div class="flex justify-start -mt-5">
+            <img class="rounded-lg object-cover overflow-hidden" src="{% static 'img/pic3.jpg' %}" />
+        </div>
+        <div class="-translate-y-96 transform -mr-48 p-10  shadow-xl rounded-xl overflow-hidden  bg-white bg-opacity-50">
+            <div class="space-y-4">
+            <p class="text-5xl font-bold text-black tracking-tight">
+                EXPLORE THE HIDDEN VALLEY!
+            </p>
+            <p class="text-xl text-black">
+                Redhouse Homestay is nestled amidst a natural setting surrounded by Tea estates and Tropical Evergreen Forest, natural mountain springs, rivulets and cascading private waterfall.
+
+                We invite our guests to savour the Homemade Coorgi Cuisine and relax in the cradle of Nature
+            </p>
+            </div>
+            <div class="border-gray-200 py-2">
+            <div>
+                <p class="text-xl text-black font-bold"> Activities in and around the property: </p>
+                <ol class="list-disc px-8">
+                    <li> Guided Trek to Viewpoint </li>
+                    <li> Trek to the private waterfall</li>
+                    <li> Tea Estate Tour</li>
+                    <li> Guided Trek to Kadanga Ridge</li>
+                    <li> Off-road Jeep Rides</li>
+                    <li> Photo-shoot at the Hidden Lake</li>
+                    <li> Bird-watching</li>
+                    <li> wildlife photography</li>
+                    <li> Camp-fire</li>
+                    <li> BBQ</li>
+                </ol> 
+            </div>
+            </div>
+        </div>
+        <div class="-mt-80 flex justify-start">
+            <img class="rounded-lg object-cover overflow-hidden" src="{% static 'img/pic4.jpg' %}" />
+        </div>
+        <div class="flex justify-start -mt-80 -mr-60 ml-28">
+            <img class="w-2/3 h-2/3 object-cover rounded-lg overflow-hidden" src="{% static 'img/pic5.png' %}" />
+        </div>
+
+        </div>
+    </section>
+    <section id ="Go">
+      <p style ="text-align: center;" class=" font-extrabold text-red-900 hover:text-white underline text-4xl pl-2  " > Gallery: </p>
+   </section>
+    <div class="grid grid-cols-4 gap-4 p-5 js-view-gallery" id="posts-container">
+        {% for post in posts %}
+            <div class="card my-1">
+            {% thumbnail post.image "250x250" crop="center" as im %}
+                <img src="{{ im.url}}" class="card-img-top" alt="...">
+            {% endthumbnail %}
+            </div>
+        {% endfor %}
+    </div>
+  <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 bg-opacity-80
+  js-modal hidden ">
+  {% csrf_token %}
+    <div class="bg-white rounded-lg w-1/2">
+      <div class="flex flex-col items-start p-4">
+        <div class="flex items-center w-full">
+          <div class="text-gray-900 font-medium text-lg"> Contact Us...</div>
+      <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer js-toggle-model-contact" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+        </svg>
+        </div>
+        <hr>
+        <div class="grid grid-cols-3 gap-7 p-5 font-extrabold">
+            <div>
+                <div> Phone Number (+91) </div>
+                <div> 9449118346 </div>
+                <div> 08257-289189 </div>
+            </div>
+            <div>
+                
+            </div>
+            <div>
+                <div> Address </div>
+                <div> Kuthyala Chirekallu House madappady </div>
+            </div>
+        </div>
+        <div class="w-full">
+        <div class="grid grid-cols-2 ">
+          <p> Name: </p>
+          <input  class ="border-2 border-blue-800 my-2 js-name w-full" > 
+        </div>
+        <div class="grid grid-cols-2 ">
+            <p> Email: </p>
+            <input  class ="border-2 border-blue-800 my-2 js-email w-full" > 
+        </div>
+        <div>
+          <p> Message: </p>
+          <textarea class ="border-2 border-blue-800 my-2 js-text w-full" rows="4" placeholder="Enter ..." maxlength="240" data-post-url="{% url 'page1:contact' %}" ></textarea>
+        </div>
+        </div>
+        <hr>
+        <div class="ml-auto">
+          <button class="bg-gray-300 text-gray-800 font-bold rounded border-b-2 border-green-600 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center js-submit" type ="button">
+            <span class="mr-2 "> Send </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="js-add-image bg-gray-300 text-gray-800 font-bold rounded border-b-2 border-green-600 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center ">
+    <span class="mr-2 "> Add New Image </span>
+  </button>
+  <div id ="Gallary" class=" js-toggle-model flex items-center justify-center fixed left-0 bottom-0 w-full h-full bg-gray-800 bg-opacity-80 hidden ">
+  {% csrf_token %}
+    <div class="bg-white rounded-lg w-1/2">
+      <div class="flex flex-col items-start p-4">
+        <div class="flex items-center w-full">
+          <div class="text-gray-900 font-medium text-lg">  Add Image </div>
+      <svg class="ml-auto fill-current text-gray-700 w-6 h-6 cursor-pointer  js-add-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18">
+        <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"/>
+        </svg>
+        </div>
+        <hr>
+        <input class ="js-input" data-post-url="{% url 'page1:newImage' %}" type="file" name="myImage" accept="image/x-png,image/gif,image/jpeg" />
+        <hr>
+        <div class="ml-auto">
+          <button class="bg-gray-300 text-gray-800 font-bold rounded border-b-2 border-green-600 hover:border-green-600 hover:bg-green-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center js-submit-post" type ="button">
+            <span class="mr-2 "> Post It  </span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endblock body %}
